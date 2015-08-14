@@ -109,41 +109,52 @@ namespace kasthack.Performance.Math {
         #region Sign: ( value != 0) | ( value >> DBS(x_type) )
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe int Sign( int value ) {
-            var input = value != 0;
+            /*
+                todo: raw IL must be:
+                    ldarg.0
+                    ldc.i4.0
+                    cgt.un
+                    ldarg.0
+                    ldc.i4.s 31
+                    shr
+                    or
+                    ret
+            */
+            var input = value != iz;
             return *( (byte*)&input ) | ( value >> IntSize );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe int Sign( long value ) {
-            var input = value != 0;
+            var input = value != lz;
             return (int)( *( (byte*)&input ) | ( value >> LongSize ) );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe int Sign( sbyte value ) {
-            var input = value != 0;
+            var input = value != sbz;
             return *( (byte*)&input ) | ( value >> ByteSize );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe int Sign( short value ) {
-            var input = value != 0;
+            var input = value != sz;
             return *( (byte*)&input ) | ( value >> ShortSize );
         }
         #endregion
         
         #region OppositeSigns: ( a ^ b ) < 0
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool OppositeSigns( int a, int b ) => ( a ^ b ) < 0;
+        public static bool OppositeSigns( int a, int b ) => ( a ^ b ) < iz;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool OppositeSigns( long a, long b ) => ( a ^ b ) < 0;
+        public static bool OppositeSigns( long a, long b ) => ( a ^ b ) < lz;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool OppositeSigns( short a, short b ) => ( a ^ b ) < 0;
+        public static bool OppositeSigns( short a, short b ) => ( a ^ b ) < sz;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool OppositeSigns( sbyte a, sbyte b ) => ( a ^ b ) < 0;
+        public static bool OppositeSigns( sbyte a, sbyte b ) => ( a ^ b ) < sbz;
         #endregion
         
         #region IsPowerOfTwo: value && !( value & ( value - 1) )

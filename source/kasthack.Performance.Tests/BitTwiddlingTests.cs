@@ -135,8 +135,8 @@ namespace kasthack.Performance.Math.Tests {
             Assert.IsFalse( Fast.IsPowerOfTwo( 0UL ) );
             Assert.IsTrue( Fast.IsPowerOfTwo( 1UL ) );
             Assert.IsTrue( Fast.IsPowerOfTwo( 2UL ) );
-            Assert.IsFalse( Fast.IsPowerOfTwo( 6ul ) );
-            Assert.IsTrue( Fast.IsPowerOfTwo( 8ul ) );
+            Assert.IsFalse( Fast.IsPowerOfTwo( 6UL ) );
+            Assert.IsTrue( Fast.IsPowerOfTwo( 8UL ) );
             Assert.IsFalse( Fast.IsPowerOfTwo( ulong.MaxValue - 1UL ) );
             Assert.IsFalse( Fast.IsPowerOfTwo( ulong.MaxValue ) );
 
@@ -163,22 +163,83 @@ namespace kasthack.Performance.Math.Tests {
         [TestMethod]
         public void Miniluv() {
             //int
-            var z = 0;
-            var p1 = 1;
-            var n1 = -p1;
-            var mv = int.MinValue;
-            var Mv = int.MaxValue;
 
 
-            Assert.AreEqual( Fast.QMin( z, n1 ), Def.Min( z, n1 ) );
-            Assert.AreEqual( Fast.QMin( z, p1 ), Def.Min( z, p1 ) );
-            Assert.AreEqual( Fast.QMin( n1, p1 ), Def.Min( n1, p1 ) );
+            Assert.AreEqual( Fast.QMin( 0, -1 ), Def.Min( 0, -1 ) );
+            Assert.AreEqual( Fast.QMin( 0, 1 ), Def.Min( 0, 1 ) );
+            Assert.AreEqual( Fast.QMin( -1, 1 ), Def.Min( -1, 1 ) );
 
-            Assert.AreEqual( Fast.QMin( z, z ), Def.Min( z, z ) );
-            Assert.AreEqual( Fast.QMin( n1, n1 ), Def.Min( n1, n1 ) );
-            Assert.AreEqual( Fast.QMin( p1, p1 ), Def.Min( p1, p1 ) );
-            Assert.AreEqual( Fast.QMin( mv + 1, mv ), Def.Min( mv+1, mv ) );
-            Assert.AreEqual( Fast.QMin( Mv, Mv - 1 ), Def.Min( Mv, Mv - 1 ) );
+            Assert.AreEqual( Fast.QMin( 0, 0 ), Def.Min( 0, 0 ) );
+            Assert.AreEqual( Fast.QMin( -1, -1 ), Def.Min( -1, -1 ) );
+            Assert.AreEqual( Fast.QMin( 1, 1 ), Def.Min( 1, 1 ) );
+
+            Assert.AreEqual( Fast.QMin( int.MinValue + 1, int.MinValue ), Def.Min( int.MinValue+1, int.MinValue ) );
+            Assert.AreEqual( Fast.QMin( int.MaxValue, int.MaxValue - 1 ), Def.Min( int.MaxValue, int.MaxValue - 1 ) );
+
+            //long
+
+            Assert.AreEqual(Fast.QMin(0L, -1L), Def.Min(0L, -1L));
+            Assert.AreEqual(Fast.QMin(0L, 1L), Def.Min(0L, 1L));
+            Assert.AreEqual(Fast.QMin(-1L, 1L), Def.Min(-1L, 1L));
+
+            Assert.AreEqual(Fast.QMin(0L, 0L), Def.Min(0L, 0L));
+            Assert.AreEqual(Fast.QMin(-1L, -1L), Def.Min(-1L, -1L));
+            Assert.AreEqual(Fast.QMin(1L, 1L), Def.Min(1L, 1L));
+
+            Assert.AreEqual(Fast.QMin(long.MinValue + 1L, long.MinValue), Def.Min(long.MinValue + 1L, long.MinValue));
+            Assert.AreEqual(Fast.QMin(long.MaxValue, long.MaxValue - 1L), Def.Min(long.MaxValue, long.MaxValue - 1L));
+
+            //short
+            Assert.AreEqual(Fast.QMin((short)0, (short)-1), Def.Min((short)0, (short)-1));
+            Assert.AreEqual(Fast.QMin((short)0, (short)1), Def.Min((short)0, (short)1));
+            Assert.AreEqual(Fast.QMin((short)-1, (short)1), Def.Min((short)-1, (short)1));
+
+            Assert.AreEqual(Fast.QMin((short)0, (short)0), Def.Min((short)0, (short)0));
+            Assert.AreEqual(Fast.QMin((short)-1, (short)-1), Def.Min((short)-1, (short)-1));
+            Assert.AreEqual(Fast.QMin((short)1, (short)1), Def.Min((short)1, (short)1));
+
+            Assert.AreEqual(Fast.QMin((short)(short.MinValue + 1), short.MinValue), Def.Min((short)(short.MinValue + 1), short.MinValue));
+            Assert.AreEqual(Fast.QMin(short.MaxValue, (short)(short.MaxValue - 1)), Def.Min(short.MaxValue, (short)(short.MaxValue - 1)));
+        }
+        [TestMethod]
+        public void Maxtest()
+        {
+            //int
+            Assert.AreEqual(Fast.QMax(0, -1), Def.Max(0, -1));
+            Assert.AreEqual(Fast.QMax(0, 1), Def.Max(0, 1));
+            Assert.AreEqual(Fast.QMax(-1, 1), Def.Max(-1, 1));
+
+            Assert.AreEqual(Fast.QMax(0, 0), Def.Max(0, 0));
+            Assert.AreEqual(Fast.QMax(-1, -1), Def.Max(-1, -1));
+            Assert.AreEqual(Fast.QMax(1, 1), Def.Max(1, 1));
+
+            Assert.AreEqual(Fast.QMax(int.MinValue + 1, int.MinValue), Def.Max(int.MinValue + 1, int.MinValue));
+            Assert.AreEqual(Fast.QMax(int.MaxValue, int.MaxValue - 1), Def.Max(int.MaxValue, int.MaxValue - 1));
+
+            //long
+
+            Assert.AreEqual(Fast.QMax(0L, -1L), Def.Max(0L, -1L));
+            Assert.AreEqual(Fast.QMax(0L, 1L), Def.Max(0L, 1L));
+            Assert.AreEqual(Fast.QMax(-1L, 1L), Def.Max(-1L, 1L));
+
+            Assert.AreEqual(Fast.QMax(0L, 0L), Def.Max(0L, 0L));
+            Assert.AreEqual(Fast.QMax(-1L, -1L), Def.Max(-1L, -1L));
+            Assert.AreEqual(Fast.QMax(1L, 1L), Def.Max(1L, 1L));
+
+            Assert.AreEqual(Fast.QMax(long.MinValue + 1L, long.MinValue), Def.Max(long.MinValue + 1L, long.MinValue));
+            Assert.AreEqual(Fast.QMax(long.MaxValue, long.MaxValue - 1L), Def.Max(long.MaxValue, long.MaxValue - 1L));
+
+            //short
+            Assert.AreEqual(Fast.QMax((short)0, (short)-1), Def.Max((short)0, (short)-1));
+            Assert.AreEqual(Fast.QMax((short)0, (short)1), Def.Max((short)0, (short)1));
+            Assert.AreEqual(Fast.QMax((short)-1, (short)1), Def.Max((short)-1, (short)1));
+
+            Assert.AreEqual(Fast.QMax((short)0, (short)0), Def.Max((short)0, (short)0));
+            Assert.AreEqual(Fast.QMax((short)-1, (short)-1), Def.Max((short)-1, (short)-1));
+            Assert.AreEqual(Fast.QMax((short)1, (short)1), Def.Max((short)1, (short)1));
+
+            Assert.AreEqual(Fast.QMax((short)(short.MinValue + 1), short.MinValue), Def.Max((short)(short.MinValue + 1), short.MinValue));
+            Assert.AreEqual(Fast.QMax(short.MaxValue, (short)(short.MaxValue - 1)), Def.Max(short.MaxValue, (short)(short.MaxValue - 1)));
 
         }
 
@@ -192,7 +253,6 @@ namespace kasthack.Performance.Math.Tests {
             Assert.AreEqual( expected, actual, "{0} returned {1} instead of {2}", funcName, actual, expected );
         }
         private static void Cmpr( sbyte actual, sbyte expected, string funcName ) {
-            //Debug.Assert( actual == expected, funcName, "{0} returned {1} instead of {2}", funcName, actual, expected );
             Assert.AreEqual( expected, actual, "{0} returned {1} instead of {2}", funcName, actual, expected );
         }
     }

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace kasthack.Performance.Strings {
     public static class Converter {
-
-        private static readonly MatchEvaluator Rep2Evaluator = Rep2;
         private static readonly MatchEvaluator RepEvaluator = Rep;
 
         private static readonly Regex Numeric = new Regex( "\\&\\#[0-9]{1,5}\\;" );

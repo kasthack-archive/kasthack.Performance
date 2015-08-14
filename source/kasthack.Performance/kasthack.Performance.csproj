@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\CollectionUtils.cs" />
+    <Compile Include="Parallel\ParallelExtensions.cs" />
     <Compile Include="Unions\Unions.cs" />
     <Compile Include="Math\BitTwiddling.cs" />
     <Compile Include="Math\Random.cs" />
